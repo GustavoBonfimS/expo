@@ -1,5 +1,6 @@
 'use dom';
 
+import type { DOMProps } from 'expo/dom';
 import { useState } from 'react';
 
 export default function Page({
@@ -8,13 +9,13 @@ export default function Page({
   showAlert,
   throwError,
   getNativeSettings,
-}: {
+}: DOMProps<{
   index: number;
   setIndexAsync: (index: number) => Promise<void>;
   showAlert: (time: number) => void;
   throwError: () => never;
   getNativeSettings: () => Promise<string>;
-} & import('expo/dom').DOMProps) {
+}>) {
   const [nativeSetting, setNativeSetting] = useState<string | null>(null);
 
   return (

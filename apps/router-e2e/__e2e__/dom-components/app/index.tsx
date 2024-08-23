@@ -14,7 +14,7 @@ export default function Page() {
       <TestCase name="Actions">
         <Actions
           index={index}
-          autoSize
+          dom={{ autoSize: true }}
           setIndexAsync={async (index) => setIndex(index)}
           showAlert={(time) => {
             alert('Hello, world! ' + time);
@@ -33,15 +33,18 @@ export default function Page() {
       </TestCase>
 
       <TestCase name="Local Asset">
-        <LocalAsset autoSize />
+        <Text style={styles.testcaseHint}>
+          Large height div with a centered local asset image. Please test scrolling for autoSize.
+        </Text>
+        <LocalAsset dom={{ autoSize: true }} />
       </TestCase>
 
       <TestCase name="Public Asset">
-        <PublicAsset autoSize />
+        <PublicAsset dom={{ autoSize: true }} />
       </TestCase>
 
       <TestCase name="Tailwind">
-        <Tailwind autoSize />
+        <Tailwind dom={{ autoSize: true }} />
       </TestCase>
     </ScrollView>
   );
@@ -73,5 +76,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 8,
     color: '#4A90E2',
+  },
+  testcaseHint: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 12,
   },
 });

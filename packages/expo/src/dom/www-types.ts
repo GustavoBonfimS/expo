@@ -20,18 +20,17 @@ export type MarshalPropValueType =
   | MarshalPropValuePrimitiveType[]
   | Record<string, MarshalPropValuePrimitiveType>
   | MarshalPropValueNativeAction;
+export interface MarshalPropsType {
+  [key: string]: MarshalPropValueType;
+}
 
 export { WebViewProps };
 
 /**
- * The explicit props for DOM components.
+ * The type of the `dom` prop for DOM components.
+ * You can use this type from native components and pass props to the underlying WebView components.
  */
-interface DOMComponentProps {
-  /**
-   * The props passing to WebView.
-   */
-  dom?: Omit<WebViewProps, 'source'>;
-
+export interface DOMWebViewProps extends WebViewProps {
   /**
    * Whether to resize the native WebView size based on the DOM content size.
    * @default false
@@ -42,9 +41,15 @@ interface DOMComponentProps {
 /**
  * The public props for DOM components.
  */
-export interface DOMProps extends DOMComponentProps {
-  [key: string]: MarshalPropValueType | DOMComponentProps[keyof DOMComponentProps];
-}
+export type DOMProps<T extends MarshalPropsType = MarshalPropsType> = {
+  [K in keyof T]: T[K];
+} & {
+  /**
+   * The props passing to the WebView component.
+   * Inside the DOM component, the `dom` prop will be undefined.
+   */
+  dom?: DOMWebViewProps;
+};
 
 export type DOMPropsWithSource = DOMProps & {
   source: WebViewProps['source'];
