@@ -1,4 +1,4 @@
-import type { BridgeMessage } from './www-types';
+import type { BridgeMessage } from './dom.types';
 
 export const NATIVE_ACTION = '$$native_action';
 export const NATIVE_ACTION_RESULT = '$$native_action_result';

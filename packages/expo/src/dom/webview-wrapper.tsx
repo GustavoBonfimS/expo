@@ -2,6 +2,13 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
 
+import type {
+  BridgeMessage,
+  DOMProps,
+  DOMPropsWithSource,
+  MarshalPropValueType,
+  WebViewProps,
+} from './dom.types';
 import {
   getInjectBodySizeObserverScript,
   getInjectEventScript,
@@ -10,13 +17,6 @@ import {
   NATIVE_ACTION,
   NATIVE_ACTION_RESULT,
 } from './injection';
-import type {
-  BridgeMessage,
-  DOMProps,
-  DOMPropsWithSource,
-  MarshalPropValueType,
-  WebViewProps,
-} from './www-types';
 
 function mergeRefs(...props) {
   return function forwardRef(node) {
