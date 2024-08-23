@@ -202,7 +202,7 @@ You can use the `autoSize` prop to automatically measure the size of a DOM compo
 import DOMComponent from './my-component';
 
 export default function Route() {
-  return <MyComponent autoSize={true} />;
+  return <MyComponent dom={{ autoSize: true }} />;
 }
 ```
 
@@ -242,6 +242,7 @@ export default function Route() {
 ```tsx my-component.tsx (web)
 'use dom';
 
+import type { DOMProps } from 'expo/dom';
 import { useEffect } from 'react';
 
 function useSize(callback: (size: [number, number]) => void) {
@@ -266,9 +267,9 @@ function useSize(callback: (size: [number, number]) => void) {
 
 export default function DOMComponent({
   onLayout,
-}: {
+}: DOMProps<{
   onLayout(size: [number, number]);
-} & import('expo/dom').DOMProps) {
+}>) {
   useSize(onLayout);
 
   return <div />;
